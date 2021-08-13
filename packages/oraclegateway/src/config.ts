@@ -1,3 +1,5 @@
+// import oracledb from "oracledb";
+
 const { NODE_ENV = "production" } = process.env;
 
 const isDev = NODE_ENV === "development";
@@ -14,10 +16,11 @@ const prodDefs: NodeJS.ProcessEnv = { ...safeDefs };
 const devDefs: NodeJS.ProcessEnv = {
   ...safeDefs,
   CORS_WHITELIST: "*",
-  ORACLE_USER: "sys",
-  ORACLE_PWD: "Oracle_18",
-  ORACLE_CONNECTSTRING: "localhost/XE",
+  ORACLE_USER: "scott",
+  ORACLE_PWD: "tiger",
+  ORACLE_CONNECTSTRING: "localhost:1521/XEPDB1",
   ORACLE_LIBDIR: "/Users/tanjimhossain/Downloads/instantclient_19_8",
+  DB_POOL_MIN: "1",
 };
 
 const env = new Proxy(process.env, {
@@ -40,6 +43,7 @@ const {
   ORACLE_PWD,
   ORACLE_USER,
   ORACLE_LIBDIR,
+  DB_POOL_MIN,
 } = env;
 
 const config = {
@@ -53,10 +57,11 @@ const config = {
     clientConfig: {
       libDir: ORACLE_LIBDIR,
     },
-    connectionConfig: {
-      createString: ORACLE_CONNECTSTRING,
+    poolConfig: {
+      connectString: ORACLE_CONNECTSTRING,
       user: ORACLE_USER,
       password: ORACLE_PWD,
+      poolMin: parseInt(DB_POOL_MIN, 10),
     },
   },
 };

@@ -12,6 +12,4 @@ server.on("listening", () => {
   debug(`listening to Port: ${PORT}`);
 });
 
-// TODO: add liveness, readiness probes
-
 export default server;
