@@ -10,6 +10,7 @@ const {
 
 const app = express();
 
+console.log(whitelist);
 app.use(
   cors({
     origin: whitelist,

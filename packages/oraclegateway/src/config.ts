@@ -51,7 +51,7 @@ const config = {
   NODE_ENV,
   PORT,
   cors: {
-    whitelist: CORS_WHITELIST.split(","),
+    whitelist: CORS_WHITELIST,
   },
   oracledb: {
     clientConfig: {
